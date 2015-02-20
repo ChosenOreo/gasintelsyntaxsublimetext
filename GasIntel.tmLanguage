@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>asm</string>
+		<string>s</string>
+		<string>S</string>
+		<string>sx</string>
+	</array>
+	<key>name</key>
+	<string>GAS x86 Intel Syntax</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>I may organize these later based on processor additions.</string>
+			<key>match</key>
+			<string>\b(?i:aa[adms]|adc[bwlq]?|x?add[bwlq]?|and[bwlq]?|arpl|bound[wl]?|bs[fr][wlq]?|bswap[lq]?|bt[crs]?[wlq]?|call[wlq]?|clc|cld|cli|cltd[dqw]?|clts|cmc|cmov(n?[abgl]e?|n?[ceosz]|np|p[eo]?)?[lqw]?|cmp[bwlq]?|cmps[bwdq]?|cmpxchg[bwlq]?|cmpxchg(8|16)b|cpuid|c[lw]td[bwlq]?|daa|das|dec[bwlq]?|div[bwlq]?|enter|esc|hlt|idiv[bwlq]?|imul[bwlq]?|in[bwlq]?|inc[bwlq]?|insd?[bwlq]?|int(\s*3|o)?|inv(d|pcid)?|invlpg|iret[dfq]?|j(n?[abgl]e?|n?[ceosz]|np|p[eo]?)|jmp|j[er]?cxz|[ls]ahf|lar|lcall|l[de]s|lea[bwlq]?|leave|l[defgs]s|[ls][gil]dt|ljmp|lmsw|loadall|lods[bwdq]?|loop(n?[ez][dw]?)?|lret|lsl|ltr|mov((s?(b[lwq]?|w[lq]?|lq?|q)?)|(z?(b[lwq]|w[lq]|l|q)))?|movd|movs(x?d|w)|mov[sz]x|mul[bwlq]?|neg[bwlq]?|nop|not[bwlq]?|x?or[bwlq]?|out[bwlq]?|outs[bdw]?|pop[bwlq]?|popal?|pop[af]d|popf[lq]?|push[bwlq]?|pushal?|push[af]d|pushf[lq]?|rc[lr][bwlq]?|(rd|wr)msr|rdtscp?|retf?|ro[lr][bwlq]?|rsm|sa[lr][bwlq]?|sbb[bwlq]?|scas[bdqw]?|set(n?[abgl]e?|n?[ceosz]|np|p[eo]?)|sh[lr]d?[bwlq]?|smsw|stc|std|sti|stos[bdqw]?|str|sub[bwlq]?|swapgs|syscall|sysret|sysenter|sysexit|test[bwlq]?|ud2|ver[rw]|fwait|wbinvd|xchg[bwlq]?|x[gs]etbv|xlatb?|xsave[cs]?(64)?|xrstors?(64)?)\b</string>
+			<key>name</key>
+			<string>entity.name.function.instructions</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Data type conversions. Apparently the Intel ones work too. I tried it.</string>
+			<key>match</key>
+			<string>\b(?i:cbw|cdqe?|cwde?|cdo|cqo|cbtw|cwt[ld]|clt[dq]|cqto)\b</string>
+			<key>name</key>
+			<string>entity.name.function.conversion.instructions</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Not really instructions.</string>
+			<key>match</key>
+			<string>\b(?i:rep(n?[ez])?|[c-gs]s|(addr|data)(16|32)|lock|wait|rex(64xyz)?)\b</string>
+			<key>name</key>
+			<string>keyword.name.function.prefixes</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i mmx</string>
+			<key>match</key>
+			<string>\b(?i:emms|mov[dq]|pack(ssdw|[us]swb)|padd([bdw]|u?s[bw])|pandn?|pcmp(eq|gt)[bdw]|pmaddwd|pmul[hl]w|psll[dqw]|psr(a[dw]|l[dqw])|psub([bdw]|u?s[bw])|punpck[hl](bw|dq|wd)|px?or|rdpmc)\b</string>
+			<key>name</key>
+			<string>entity.name.function.mmx_instructions</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'sse ext'</string>
+			<key>match</key>
+			<string>\b(?i:maskmovq|movntps|movntq|prefetcht[012]|prefetchnta|sfence)\b</string>
+			<key>name</key>
+			<string>entity.name.function.sse</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'sse ext'</string>
+			<key>match</key>
+			<string>\b(?i:add[sp]s|cmp[ps]s|u?comiss|cvt(p(i2ps|s2pi)|s(i2ss|s2si)|t(ps2pi|ss2si))|div[ps]s|ldmxcsr|(max|min)[ps]s|mov(a|hl?|lh?|msk|nt)ps|v?mov(s|up)s|mul[ps]s|rcp[ps]s|r?sqrt[ps]s|shufps|stmxcsr|sub[ps]s|unpck[hl]ps|andn?ps|x?orps|pavg[bw]|pextrw|pminsrw|p(max|min)(sw|ub)|pmovmskb|pmulhuw|psadbw|pshufw)\b</string>
+			<key>name</key>
+			<string>entity.name.function.sse_simd</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'sse2'</string>
+			<key>match</key>
+			<string>\b(?i:clflush|[lm]fence|maskmovdqu|v?movnt(dq|i|pd)|pause)\b</string>
+			<key>name</key>
+			<string>entity.name.function.sse2</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'sse2'</string>
+			<key>match</key>
+			<string>\b(?i:v?add[ps][ds]|andn?pd|bzhi[wl]?|cmp[ps]d|u?comisd|cvtdq2p[ds]|cvtt?pd2(dq|pi)|cvtpd2ps|cvtp[is]2pd|cvtt?ps2dq|cvtt?sd2s[is]|cvts[is]2sd|div[ps][ds]|v?(max|min)[ps][ds]|v?mov[ahlu]pd|v?movmskpd|v?mul[ps]d|x?orpd|shufpd|sqrt[ps]d|sub[ps]d|unpck[hl]pd|unpcklpd|movdq(2q|[au])|movq2dq|paddq|psubq|pmuludq|pshuf([hl]w|d)|ps[lr]ldq|punpck[hl]qdq)\b</string>
+			<key>name</key>
+			<string>entity.name.function.sse2_simd</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'pni/sse3'</string>
+			<key>match</key>
+			<string>\b(?i:lddqu|monitor|mwait)\b</string>
+			<key>name</key>
+			<string>entity.name.function.sse3</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'ssse3'</string>
+			<key>match</key>
+			<string>\b(?i:addsubp[ds]|haddp[ds]|hsubp[ds]|v?mov(d|s[hl])dup|psign[bdw]|pshufb|pmulhrsw|pmaddubsw|phsub(s?w|d)|phadd(s?w|d)|palignr|pabs[bdw])\b</string>
+			<key>name</key>
+			<string>entity.name.function.xsse3_simd</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'sse4'</string>
+			<key>match</key>
+			<string>\b(?i:v?mpsadbw|phminposuw|pmul(ld|dq)|dpp[ds]|blendv?p[ds]|pblendvb|pblendw|p(max|min)(s[bd]|u[wd])|roundp[ds]|rounds[ds]|insertps|pinsr[bwdq]|extractps|pextr[bdq]|pmov[sz]xb[dwq]|pmov[sz]xw[dq]|pmov[sz]xdq|pmov[sz]x|ptest|pcmpeqq|packusdw|v?movntdqa|lzcnt|popcnt|extrq|insertq|movnts[ds]|crc32|pcmp[ei]str[im]|pcmpgtq)\b</string>
+			<key>name</key>
+			<string>entity.name.function.sse4_simd</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i x87</string>
+			<key>match</key>
+			<string>\b(?i:f(2xm1|abs|addp?|bld|b?stp|chs|n?clex|u?comp{0,2}|decstp|n?disi|div(p|rp?)?|n?eni|free(p|\s*ST)?|iadd|icomp?|idivr?|ildl?|imul|incstp|n?init|ist((pl?|l)|tp)?|isubr?|ld[1slt]?|ldcw|ldenv[dw]?|ldl2[et]|ldl[gn]2|ldpi|ldz|mulp?|nop|n?stenv[wd]?|n?stsw|pa?tan|prem1?|rndint|rstor[dw]?|n?savew?|scale|sqrt|st(p?[slt])|n?stcw|sub(p|rp?)?|tst|wait|xam|xch|xtract|yl2x(p1)?|setpm|cos|saved|sin(cos)?|cmovn?b?e?|cmovn?u|u?comip?|xrstor|xsave))\b</string>
+			<key>name</key>
+			<string>entity.name.function.fpu_x87</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i aes</string>
+			<key>match</key>
+			<string>\b(?i:aes(en|de)c(last)?|aeskeygenassist|aesimc)\b</string>
+			<key>name</key>
+			<string>entity.name.function.aes_functions</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'bmi i'</string>
+			<key>match</key>
+			<string>\b(?i:andn[lq]?|bextr[lq]?|blsi[lq]?|blsmsk[lq]?|blsr[dlq]?|tzcnt[wlq]?)\b</string>
+			<key>name</key>
+			<string>entity.name.function.bmi1</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'bmi2'</string>
+			<key>match</key>
+			<string>\b(?i:mulx[lq]?|pdep[lq]?|pext[lq]?|rorx[lq]?|s(h[lr]|ar)x)\b</string>
+			<key>name</key>
+			<string>entity.name.function.bmi2</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'clmul'</string>
+			<key>match</key>
+			<string>\b(?i:pclmulqdq)\b</string>
+			<key>name</key>
+			<string>entity.name.function.clmul</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'prefetchw'</string>
+			<key>match</key>
+			<string>\b(?i:prefetchw)\b</string>
+			<key>name</key>
+			<string>entity.name.function.prefetchw</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'fsgs'</string>
+			<key>match</key>
+			<string>\b(?i:(rd|wr)[fg]sbase)\b</string>
+			<key>name</key>
+			<string>entity.name.function.fsgsbase</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'rdrand'</string>
+			<key>match</key>
+			<string>\b(?i:rdrand)\b</string>
+			<key>name</key>
+			<string>entity.name.function.rdrand</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'avx'</string>
+			<key>match</key>
+			<string>\b(?i:vp?broadcast(s[sd]|f128)?|v(extract|insert|perm2)[if]128|vgather[dq]p[ds]|vp?maskmov|vpblendd|vperm([dq]|(il)?p[sd])|vpgather[dq]{1,2}|vpsllv[dq]|vpsr(avd|lv[qd])|vtestp[ds]|vzero(all|upper))\b</string>
+			<key>name</key>
+			<string>entity.name.function.AVXx</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'f16c'</string>
+			<key>match</key>
+			<string>\b(?i:vcvt(ph2ps|ps2ph))\b</string>
+			<key>name</key>
+			<string>entity.name.function.F16c</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'fma'</string>
+			<key>match</key>
+			<string>\b(?i:vfn?m((add(sub)?|sub(add)?)((132|213|231)[ps][ds])))\b</string>
+			<key>name</key>
+			<string>entity.name.function.FMA</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'rtm'</string>
+			<key>match</key>
+			<string>\b(?i:x(abort|begin|end|test))\b</string>
+			<key>name</key>
+			<string>entity.name.function.RTM</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'HLE'</string>
+			<key>match</key>
+			<string>\b(?i:x(acquire|release|test))\b</string>
+			<key>name</key>
+			<string>entity.name.function.HLE</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>cpuid | grep -i 'xsaveopt'</string>
+			<key>match</key>
+			<string>\b(?i:xsaveopt(64)?)\b</string>
+			<key>name</key>
+			<string>entity.name.function.xsave</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)(#(#|include|define|undef|if|ifn?def|else|elsif|endif|pragma|warning))|__(FILE|LINE|DATE|TIME(STAMP)?|STDC_(VERSION|HOSTED)?|GNUC|GNUC_MINOR|GNUC_PATCHLEVEL|VERSION|STRICT_ANSI|BASE_FILE|INCLUDE_LEVEL|OPTIMIZE|OPTIMIZE_SIZE|NO_INLINE|CHAR_UNSIGNED|CHAR_BIT|INT_SHORT|SCHAR_MAX|SHRT_MAX|INT_MAX|LONG_MAX|LONG_LONG_MAX|REGISTER_PREFIX|USER_LABEL_PREFIX)__\b</string>
+			<key>name</key>
+			<string>support.constant.preprocessor</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)(#\s+(#|include|define|undef|if|ifn?def|else|elsif|endif|pragma|warning).*)\b</string>
+			<key>name</key>
+			<string>invalid.warnings</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>#.*$</string>
+			<key>name</key>
+			<string>comment.assembly</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>name</key>
+			<string>comment.assembly</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>By the way, the ~ is a bitwise not. I decided to put the two prefix operators together.</string>
+			<key>match</key>
+			<string>(?&lt;!\w)[-~]?[1-9][0-9]*\b</string>
+			<key>name</key>
+			<string>constant.numeric.decimal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[$][-~]?[1-9][0-9]*\b</string>
+			<key>name</key>
+			<string>constant.other.decimal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[-~]?(?i)(0x)[A-F0-9]+\b</string>
+			<key>name</key>
+			<string>constant.numeric.hex</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[$](?i)(0x)[A-F0-9]+\b</string>
+			<key>name</key>
+			<string>constant.other.hex</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[-~]?(0[Bb])[01]+\b</string>
+			<key>name</key>
+			<string>constant.numeric.binary</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[$][-~]?(0[Bb])[01]+\b</string>
+			<key>name</key>
+			<string>constant.other.binary</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[-~]?0[0-7]*\b</string>
+			<key>name</key>
+			<string>constant.numeric.octal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[$][-~]?0[0-7]*\b</string>
+			<key>name</key>
+			<string>constant.other.octal</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>H8/300, Renesas/SuperH SH, and AMD 29K: use prefix 0[DFPRSX]. ARC: 0[DFRS]. Intel 960: 0[DFT]. HPPA: 0[E] (Captial E only. Others don't matter.)</string>
+			<key>match</key>
+			<string>(?&lt;!\w)(?i)0[DFT][+-]?([0-9]*\.?[0-9]*)(e[+-]?[0-9]+)?</string>
+			<key>name</key>
+			<string>constant.numeric.float</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>See above for details.</string>
+			<key>match</key>
+			<string>(?&lt;!\w)[$](?i)0[DFT][+-]?([0-9]*\.?[0-9]*)(e[+-]?[0-9]+)?</string>
+			<key>name</key>
+			<string>constant.other.float</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)[$]?(?i)'([!-\[\]-~]|\\([\\bfnrt]|x[0-9a-f]{1,2}|[0-9]{3}))</string>
+			<key>name</key>
+			<string>constant.character</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(".*?"|&lt;.*?&gt;)</string>
+			<key>name</key>
+			<string>string.quoted</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Registers case insensitive. Not sure about some of these (Like the last few). I found some on Wikipedia.</string>
+			<key>match</key>
+			<string>(?i:[er]?[a-d]x|[a-d][lh]|[re]?s[ip]|s[ip]l|[re]?di|dil|[re]?bp|bpl|[c-gs]s|[re]?ip|e?flags|db([0236-9]|1[0-5]?)|tr[67]?|st(\([01-7]\))?|cs|ds|es|fs|gs|ss|esp[0-2]|[xy]?mm([02-9]|1[0-5]?)|zmm([4-9]|[12][0-9]?|3[10]?)|xmcrt|[gli]dtr|[cd]r([02-9]|1[0-5]?)|msr|r([89]|1[0-5])[dwb]?|[cst]w|fp_([id]p|[cd]s|opc)|mxcsr|msw)\b</string>
+			<key>name</key>
+			<string>variable.parameter.registers</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Assembly label/symbols.</string>
+			<key>match</key>
+			<string>((\s+|^)([A-Za-z$_.0-9]|C-[BA])+[:])</string>
+			<key>name</key>
+			<string>keyword.label.assembly</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(?i:movz(lq)?)\b</string>
+			<key>name</key>
+			<string>invalid.instructions</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Pseudo-ops, directives, or subsection markers.</string>
+			<key>match</key>
+			<string>(?&lt;!\w)(?i:\.(abort|line|ln|loc_mark_blocks|intel_syntax(\s*(no)?prefix)?|att_syntax\s*noprefix|app-file|asci[iz]|b?align|bundle_(align_mode|(un)?lock)|byte|cfi_(sections|startproc|endproc|personality|lsda|def_cfa|def_cfa_register|def_cfa_offset|adjust_cfa_offset|offset|rel_offset|register|restore|undefined|same_value|remember_state|return_column|signal_frame|window_save|escape|val_encoded_addr)|code(16(gcc)?|32|64)|data|def|desc|dim|double|eject|else(if)?|end([ei]f|func|[mr])?|exitm|equ(iv)?|eqv|err(or)?|extern|fail|file|fill|float|globa?l|hidden|hword|ident|if|incbin|include|int(ernal)?|irpc?|l?comm|lflags|linkonce|loc(_mark_labels|al)?|mri|(no)?list|long|macro|(no)?altmacro|octa|org|p2align[wl]?|popsection|previous|print|protected|p?size|purgem|pushsection|quad|rept|sbttl|scl|section|set|short|quad|single|skip|sleb128|space|stab[dns]|string(8|16|32|64)?|struct|subsection|symver|tag|text|title|type|uleb128|val|version|vtable_(entry|inherit)|warning|weak(ref)?|word|att_syntax(\s*prefix)?)\b)</string>
+			<key>name</key>
+			<string>support.constant.subsections</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.arch</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?&lt;!\w)\.(?i:(arch) (i8086|i[1-6]86|pentium(pro|iii?|4)?|prescott|nocona|core(2|i7)?|[lk]1om|k6(_2)?|athlon|k8|amdfam10|bdver[1-3]|btver[12]|generic(32|64)|.(mmx|sse([2-5]|4(.[12]|a))?|ssse3|avx[2]?|[vs]mx|ept|clflush|movbe|xsave(opt)?|aes|pclmul|fma|fsgsbase|rdrnd|f16c|bmi2|lzcnt|invpcid|vmfunc|hle|rtm|adx|rdseed|prfchw|smap|mpx|sha|3dnowa?|syscall|rdtscp|svme|abm|lwp|fma4|xop|cx16|padlock|avx512(p?f|cd|er)?))),\s*(no)?jumps</string>
+			<key>name</key>
+			<string>support.constant.arch_specification</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.symbol</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Alternative ways of writing the .set and .eqv directives.</string>
+			<key>match</key>
+			<string>\b([A-Za-z$_.0-9]+)\s*(==?)\s*</string>
+			<key>name</key>
+			<string>support.constant.alternatives</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.asm</string>
+	<key>uuid</key>
+	<string>245288b9-8026-4e7f-8b27-d4ff081a25bf</string>
+</dict>
+</plist>
